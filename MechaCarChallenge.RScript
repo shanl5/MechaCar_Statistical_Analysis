@@ -1,0 +1,73 @@
+# Deliverable One (D1) : Linear Regression to Predict MPG
+# ====================
+# D1.1
+# Place the `MechaCar_mpg.csv` file in the session active directory
+
+# D1.2
+# Create <this file> and save it with name `MechaCarChallenge.RScript` to active directory
+
+# D1.3
+library(dplyr)
+
+# D1.4
+mechacar_mpg <- read.csv(file = "MechaCar_mpg.csv")
+
+# D1.5
+mechacar_lm <- lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle + ground_clearance + AWD, data = mechacar_mpg)
+
+# D1.6
+summary(mechacar_lm)
+
+# D1.7
+# Save <this file> to GitHub repository
+
+# Deliverable Two (D2) : Summary Statistics on Suspension Coils
+# ====================
+# ++++
+# D2.1
+# Place the `Suspension_Coil.csv` file in the session active directory
+
+# D2.2
+suspension_coil <- read.csv(file = "Suspension_Coil.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# D2.3
+total_summary <- suspension_coil %>% summarize(Mean = mean(PSI), Median = median(PSI), Variance = sd(PSI)**2, SD = sd(PSI))
+
+# D2.4
+lot_summary <- suspension_coil %>% group_by(Manufacturing_Lot) %>%  summarize(Mean = mean(PSI), Median = median(PSI), Variance = sd(PSI)**2, SD = sd(PSI))
+
+# D2.5
+# Save <this file> to GitHub repository
+
+# Deliverable Three (D3) : T-Tests on Suspension Coils
+# ======================
+# D3.1 (see syntax aids and comments at https: // bookdown.org/ndphillips/YaRrr/t-test-t-test.html )
+suspension_coil_ttest_all <- t.test(suspension_coil$PSI, # Vector of data
+                                    mu = 1500)           # Null: Mean is 1500
+
+suspension_coil_ttest_all
+
+# D3.2 (again reference https: // bookdown.org/ndphillips/YaRrr/t-test-t-test.html )
+# (a) Lot1
+suspension_coil_ttest_L1 <- t.test(suspension_coil$PSI[suspension_coil$Manufacturing_Lot == "Lot1"], # Vector of data
+                                   mu = 1500,                                                        # Null: Mean is 1500
+                                   subset = suspension_coil$Manufacturing_Lot == "Lot1")
+
+suspension_coil_ttest_L1
+
+# (b) Lot2
+suspension_coil_ttest_L2 <- t.test(suspension_coil$PSI[suspension_coil$Manufacturing_Lot == "Lot2"], # Vector of data
+                                   mu = 1500,                                                        # Null: Mean is 1500
+                                   subset = suspension_coil$Manufacturing_Lot == "Lot2")
+
+suspension_coil_ttest_L2
+
+# (c) Lot3
+suspension_coil_ttest_L3 <- t.test(suspension_coil$PSI[suspension_coil$Manufacturing_Lot == "Lot3"], # Vector of data
+                                   mu = 1500,                                                        # Null: Mean is 1500
+                                   subset = suspension_coil$Manufacturing_Lot == "Lot3")
+
+suspension_coil_ttest_L3
+
+# D3.3
+# Save <this file> to GitHub repository
